@@ -21,6 +21,7 @@
 * 在JAVA 8下编译通过。
 * 独立的GUI应用，非Client/Server架构。
 * 跨平台，在Windows/Mac/Linux均能运行。
+* GUI截图，可以在`/screenshot`中找到
 
 工程特性
 -----
