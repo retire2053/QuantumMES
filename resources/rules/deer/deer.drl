@@ -1,0 +1,85 @@
+package rules.deer;
+
+import tom.model.*;
+import husky.service.*;
+import husky.ut.*;
+
+global IndicatorService service;
+global Patient patient;
+
+
+
+rule "deer.drl"
+ 	when
+ 	then
+ 		Utility.helper(drools);
+ 		System.out.println("deer.drl Loaded");
+end
+
+rule "抗病毒起点-001"
+	when
+		not (exists TreatHistory(name==TreatConst.ANTI_VIRUS))
+		IndicatorS(name==IndicatorConst.HBeAg, state==IndicatorStateConst.POSITIVE, time==0)
+		IndicatorS(name==IndicatorConst.HBVDNA, state=="接近2万" ||=="2万以上", time==0)
+		IndicatorS(name==IndicatorConst.ALT, state=="异常" || =="疑似异常", time==0)
+		IndicatorTS(name==IndicatorConst.ALT, state=="大波动", timespan=="最近")
+	then
+		insert(new TreatCandidate(TreatConst.ANTI_VIRUS));
+		Utility.helper(drools);
+end
+
+rule "抗病毒起点-002"
+	when
+	then
+end
+
+rule "抗病毒起点-003"
+	when
+	then
+end
+
+
+rule "SPLENECTOMY"
+	when
+		Diagnose(name==DiagnoseConst.CIRRHOSIS_CHB, time==0)
+		TreatHistory(name==TreatConst.SPLENECTOMY , $stime: stime<0, etime==$stime)
+		Question(name==QuestionConst.HOW_TO_TREAT, time==0)
+	then
+		insert(new NeedMoreIndicator(IndicatorConst.HBVDNA, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.AFP, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.ROUTINE_BLOOD_TEST, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.LIVER_FUNCTION_TEST, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.RENAL_FUNCTION_TEST, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.CIRRHOSIS_TEST, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.LIVER_B_ULTRASONIC, 0));
+		insert(new NeedMoreInformation(InformationConst.DRUG_HISTORY, 0));
+		insert(new NeedMoreInformation(InformationConst.SYMPTOM, 0));
+end
+
+rule "LAM_CHANGE_QUESTION"
+	when
+		TreatHistory(name==TreatConst.LAM, stime<=-24, etime==0)
+		IndicatorV(name==IndicatorConst.HBVDNA, value>3, unit==IndicatorUnitConst.POWER_ML, time==0)
+		Question(name==QuestionConst.CHANGE_CURRENT_DRUG, time==0)
+	then
+		insert(new NeedMoreIndicator(IndicatorConst.HB_5_EXAMINATION, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.HBVDNA, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.LIVER_FUNCTION_TEST, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.RENAL_FUNCTION_TEST, 0));
+		insert(new NeedMoreInformation(InformationConst.DRUG_HISTORY, 0));
+end
+			
+rule "START_ANTI_VIRUS"
+	when
+		Question(name==QuestionConst.START_ANTI_VIRUS, time==0)
+	then
+		insert(new NeedMoreIndicator(IndicatorConst.HB_5_EXAMINATION, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.HBVDNA, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.LIVER_FUNCTION_TEST, 0));
+		insert(new NeedMoreIndicator(IndicatorConst.RENAL_FUNCTION_TEST, 0));
+		insert(new NeedMoreInformation(InformationConst.DRUG_HISTORY, 0));
+end
+	
+
+		
+		

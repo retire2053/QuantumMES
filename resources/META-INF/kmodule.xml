@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
+	<kbase name="deer" packages="rules.deer">
+        <ksession name="rules.deer"/>
+    </kbase>
+
+    <kbase name="indicators-alt" packages="rules.indicators.alt">
+        <ksession name="rules.indicators.alt"/>
+    </kbase>
+    <kbase name="indicators-tbil" packages="rules.indicators.tbil">
+        <ksession name="rules.indicators.tbil"/>
+    </kbase>
+    <kbase name="indicators-ast" packages="rules.indicators.ast">
+        <ksession name="rules.indicators.ast"/>
+    </kbase>
+    <kbase name="hbvdna" packages="rules.indicators.hbvdna">
+        <ksession name="rules.indicators.hbvdna"/>
+    </kbase>
+    <kbase name="timemark" packages="rules.timemark">
+        <ksession name="rules.timemark"/>
+    </kbase>
+    <kbase name="guide2015hbdiagnose" packages="rules.guide.guide2015.hbdiagnose, rules.timemark, rules.indicators.alt, rules.indicators.hbvdna, rules.indicators.ast">
+        <ksession name="rules.guide.guide2015.hbdiagnose"/>
+    </kbase>
+    <kbase name="guide2015cirrdiagnose" packages="rules.guide.guide2015.cirrhosisdiagnose, rules.timemark, rules.indicators.alt, rules.indicators.hbvdna, rules.indicators.ast, rules.guide.guide2015.hbdiagnose">
+        <ksession name="rules.guide.guide2015.cirrhosisdiagnose"/>
+    </kbase>
+    
+    <kbase name="guide2015treat" packages="rules.guide.guide2015.treat, rules.timemark, rules.indicators.alt, rules.indicators.hbvdna, rules.indicators.ast, rules.indicators.tbil, rules.guide.guide2015.hbdiagnose">
+        <ksession name="rules.guide.guide2015.treat"/>
+    </kbase>
+
+</kmodule>
