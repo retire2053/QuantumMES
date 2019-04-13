@@ -74,11 +74,11 @@ public class ConsequenceEmulator {
 
 	private String getPart1() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("package tom.rule.execution.emulate;\n");
+		sb.append("package qmes.rule.execution.emulate;\n");
 		sb.append("import java.util.ArrayList;\n");
 		sb.append("import java.util.List;\n");
 		sb.append("import qmes.model.HuskyObject;\n");
-		sb.append("import tom.rule.execution.emulate.UtilityEmulator;\n");
+		sb.append("import qmes.rule.execution.emulate.UtilityEmulator;\n");
 		sb.append("import qmes.model.*;\n");
 		sb.append("public class Emulator2 {\n");
 		sb.append("\tUtilityEmulator Utility = new UtilityEmulator();\n");
@@ -173,13 +173,13 @@ public class ConsequenceEmulator {
 	private List<HuskyObject> executeMethod(String basedir, String rulename) {
 
 		try {
-			log.info("dynamically load class for tom.rule.execution.emulate.Emulator2");
+			log.info("dynamically load class for qmes.rule.execution.emulate.Emulator2");
 
 			URLClassLoader loader1 = new URLClassLoader(new URL[] { new File(basedir).toURL() },
 					ConsequenceEmulator.class.getClassLoader());
-			Class emulator2_class = loader1.loadClass("tom.rule.execution.emulate.Emulator2");
+			Class emulator2_class = loader1.loadClass("qmes.rule.execution.emulate.Emulator2");
 
-			log.info("dynamically execute method for tom.rule.execution.emulate.Emulator2");
+			log.info("dynamically execute method for qmes.rule.execution.emulate.Emulator2");
 			
 			Method executeMethod = emulator2_class.getMethod("execute", new Class[] { String.class });
 			Method getObjectMethod = emulator2_class.getMethod("getObject", new Class[] {});
