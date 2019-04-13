@@ -1,6 +1,6 @@
 量子医疗专家系统 
 ======
-`Quantum Medical Expert System`，简称`Q-MES`，是一个应用在医疗咨询场景中专家系统框架。
+`Quantum Medical Expert System`，简称`Q-MES`，是一个应用在医疗咨询场景中的Java专家系统框架。
 
 该框架将患者在咨询中的问题转化成为结构化的患者主诉后，通过触发建造在三元特征组之上的规则引擎，形成给用户智能化的建议。
 
